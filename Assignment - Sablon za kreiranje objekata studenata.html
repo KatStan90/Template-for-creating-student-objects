@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sablon za kreiranje objekata studenata</title>
+</head>
+<body>
+  <script>
+
+function Student(name, address, phone, course) {
+  this.name = name;
+  this.address = address;
+  this.phone = phone;
+  this.course = course;
+
+  Student.prototype.getInfo = function() {
+    return "Name: " + this.name + "\n" +
+    "Address: " + this.address + "\n" +
+    "Phone: " + this.phone + "\n" +
+    "Course: " + this.course + "\n"
+    }
+  }
+
+let student1 = new Student("John Benson", "High Park 36", "(507) 833-3567", "Geography");
+
+let student1Info = student1.getInfo();
+
+console.log(student1Info);
+
+function Students(name, address, phone, course) {
+  Student.call(this, name, address, phone, course);
+}
+Students.prototype = Object.create(Student.prototype);
+Students.prototype.constructor = Students;
+Students.prototype.getInfo = function () {
+  return Student.prototype.getInfo.call(this)
+}
+
+let student2 = new Students("Maria Dahl", "Solnedgang gate 2", "(507) 695-778", "English");
+let student3 = new Students("Emma Graff", "Nedre gate 2", "(507) 989-778", "History");
+let student4 = new Students("Edward John", "Akkerbrygge 44", "(507) 445-665", "Anatomy");
+
+let student2Info = student2.getInfo();
+let student3Info = student3.getInfo();
+let student4Info = student4.getInfo();
+
+console.log(student2Info);
+console.log(student3Info);
+console.log(student4Info);
+
+  </script>
+</body>
+</html>
